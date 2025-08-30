@@ -15,9 +15,12 @@ def create_app(config_class="config.DevelopmentConfig"):
     db.init_app(app)
     migrate.init_app(app, db)
 
-    # Import and register blueprints here (we'll add routes later)
-    from app.routes import routes
-    app.register_blueprint(routes.bp) # Assuming routes will be in a Blueprint
+    # Register blueprints
+    from app.routes.routes import bp as main_bp
+    app.register_blueprint(main_bp)
+
+    from app.routes.chatbot import bp as chatbot_bp
+    app.register_blueprint(chatbot_bp)
 
     return app
 
